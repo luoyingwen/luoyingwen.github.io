@@ -1,0 +1,108 @@
+body {
+	color:rgb(110,110,110);
+	background-color:black;
+	font-family: monospace;
+    white-space: pre;
+    overflow:hidden;
+	font-size: 14px;
+}
+
+a, a:hover, a:visited, a:active {
+	color:inherit;
+}
+#canvas {
+	position:absolute;
+	left: 0; top: 0;
+	width:100%; height:100%;
+	margin:0; padding: 0;
+}
+
+#statistics {
+	position:absolute;
+	right:42px; bottom:42px;
+	width:200px; height:30px;
+	margin:20px 20px; padding: 0;
+	text-align: right;
+}
+
+#controls {
+	position:absolute;
+	left: 42px; bottom: 42px;
+	width: 300px; height:auto;
+	margin:0; padding: 0;
+	overflow: auto;
+	display:flex;
+	flex-direction:column;
+}
+#controls input, #controls label, #controls select {
+	width: 90%;
+	display: block;
+	margin: 0 auto;
+}
+#controls > button {
+	width: 50%;
+	border: none;
+	padding: 0;
+	margin: 0 auto;
+}
+.control {
+	display:flex;
+	flex-direction:column;
+	border: 1px solid rgb(48, 48, 48);
+	background-color:rgba(0,0,0,0.75);
+	padding: 10px 0;
+}
+#controls .control > * + * {
+	margin-top:10px;
+}
+
+#controls .control + .control {
+	margin-top:10px;
+}
+
+#console {
+	position:absolute;
+	left: 42px; top: 0;
+	width: auto; height:4.9em;
+	margin:0; padding: 0;
+	overflow-y: hidden;
+	overflow-x: visible;
+}
+
+#info {
+	position:absolute;
+	right: 42px; top: 42px;
+	width: 300px; height:auto;
+	margin:0; padding: 0;
+	overflow: auto;
+	background-color:rgba(0,0,0,0.75)
+}
+
+.planet {
+    border: 1px solid rgb(48, 48, 48);
+    padding: 5px 10px;
+}
+.planet > .name {
+	font-weight: bold;
+	font-size: 18px;
+	color:rgb(128,128,128);
+}
+dl {
+	margin-left:20px;
+	margin-top:2px;
+	margin-bottom:5px;
+}
+dt {
+	float: left;
+	clear: left;
+	min-width: 100px;
+	text-align: right;
+	font-weight: bold;
+}
+dt:after {
+	content: ":";
+}
+dd {
+	margin: 0 0 0 100px;
+	padding: 0 0 0 0;
+}
