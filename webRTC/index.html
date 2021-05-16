@@ -24,5 +24,10 @@ connection.mediaConstraints = {
         optional: []
     }
 };
+connection.processSdp = function(sdp) {
+    sdp = connection.CodecsHandler.preferCodec(sdp, 'vp9');
+    return sdp;
+};
+connection.codecs.video = 'VP9';
 connection.openOrJoin('videotest_uhd');
 </script>
