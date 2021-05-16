@@ -26,6 +26,8 @@ connection.mediaConstraints = {
 };
 connection.processSdp = function(sdp) {
     sdp = connection.CodecsHandler.preferCodec(sdp, 'vp9');
+    sdp = connection.CodecsHandler.setVideoBitrates(sdp, {min: 4000, max: 8000});
+    
     return sdp;
 };
 connection.codecs.video = 'VP9';
