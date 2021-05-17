@@ -1,0 +1,35 @@
+<script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
+<script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+
+<script>
+var connection = new RTCMultiConnection();
+
+// this line is VERY_important
+connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+// if you want audio+video conferencing
+connection.session = {
+    audio: true,
+    video: true,
+};
+connection.mediaConstraints = {
+    audio: true,
+    video: {
+        mandatory: {
+            minWidth: 1280,
+            maxWidth: 1280,
+            minHeight: 720,
+            maxHeight: 720
+        },
+        optional: []
+    }
+};
+connection.processSdp = function(sdp) {
+    sdp = connection.CodecsHandler.preferCodec(sdp, 'vp9');
+    sdp = connection.CodecsHandler.setVideoBitrates(sdp, {min: 4000, max: 8000});
+    
+    return sdp;
+};
+connection.codecs.video = 'VP9';
+connection.openOrJoin('videotest_uhd');
+</script>
