@@ -1,5 +1,7 @@
 <script src="https://rtcmulticonnection.herokuapp.com/dist/RTCMultiConnection.min.js"></script>
 <script src="https://rtcmulticonnection.herokuapp.com/socket.io/socket.io.js"></script>
+<script src="adapter-latest.js"></script>
+<script src="sdp_tools.js"></script>
 
 <script>
 var connection = new RTCMultiConnection();
@@ -9,11 +11,11 @@ connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 
 // if you want audio+video conferencing
 connection.session = {
-    audio: true,
+    audio: false,
     video: true,
 };
 connection.mediaConstraints = {
-    audio: true,
+    audio: false,
     video: {
         mandatory: {
             minWidth: 3840,
@@ -25,11 +27,24 @@ connection.mediaConstraints = {
     }
 };
 connection.processSdp = function(sdp) {
-    sdp = connection.CodecsHandler.preferCodec(sdp, 'vp9');
-    sdp = connection.CodecsHandler.setVideoBitrates(sdp, {min: 14000, max: 30000});
+    //sdp = connection.CodecsHandler.preferCodec(sdp, 'h264');
+    //sdp = connection.CodecsHandler.setVideoBitrates(sdp, {min: 30000, max: 30000});
     
+    let parsedSdp = SDPTools.parseSDP(sdp)
+    for(let i = 0; i < parsedSdp.media.length; i++){
+        let media = parsedSdp.media[i]
+        let codec = ['VP9','VP8']
+        console.warn("删除VP8、VP9编码")
+        var ASBitrate= 20000
+        ASBitrate = ASBitrate || 4096
+        SDPTools.removeCodecByName(parsedSdp, i, codec)
+        SDPTools.setXgoogleBitrate(parsedSdp, ASBitrate, i)
+        SDPTools.removeRembAndTransportCC(parsedSdp, i)
+        media.payloads = media.payloads.trim()
+    }
+    sdp = SDPTools.writeSDP(parsedSdp)
+
     return sdp;
 };
-connection.codecs.video = 'VP9';
 connection.openOrJoin('videotest_uhd');
 </script>
