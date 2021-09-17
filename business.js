@@ -34,7 +34,7 @@ function startMeeting()
             let media = parsedSdp.media[i]
             let codec = ['VP9','VP8']
             console.warn("删除VP8、VP9编码")
-            var ASBitrate= 20000
+            var ASBitrate= 5000
             ASBitrate = ASBitrate || 4096
             SDPTools.removeCodecByName(parsedSdp, i, codec)
             SDPTools.setXgoogleBitrate(parsedSdp, ASBitrate, i)
