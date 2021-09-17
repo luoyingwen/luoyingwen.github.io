@@ -13,8 +13,16 @@ function startMeeting()
     connection.mediaConstraints = {
         audio: false,
         video: {
-            width: { ideal: 4096 },
-            height: { ideal: 2160 }
+            width: { 
+                ideal: 3840,
+                min: 3840,
+                max: 3840
+             },
+            height: { 
+                ideal: 2160,
+                min: 2160,
+                max: 2160
+            }
         }
     };
     connection.processSdp = function(sdp) {
