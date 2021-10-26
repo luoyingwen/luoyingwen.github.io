@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./index.css">
 </head>
 <body>
+  <script src="./assets/jquery-3.4.1.min.js"></script>
 
 <!--
   This page interacts with the Agora Voice Call for Web Next Generation SDK to easily create Video Call
@@ -102,6 +103,22 @@
       <button id="leave" type="button" class="btn btn-primary btn-sm" disabled>Leave</button>
     </div>
   </form>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $("#listen").click(function(){
+        console.log("listen mouse event");
+        $('video').click(function (e) { //Offset mouse Position
+          var posX = $(this).offset().left,
+              posY = $(this).offset().top;
+          alert((e.pageX - posX) + ' , ' + (e.pageY - posY));
+        });
+      });
+    });
+
+  </script>
+
+  <button id="listen" type="button">Listen2</button>
   <!--
     This local media splayer is enabled when the user has successfully joined a Video Call channel.
   -->
@@ -120,7 +137,6 @@
 <!--
   Import the Agora Video Call SDK for Web and local calls to it.
 -->
-<script src="./assets/jquery-3.4.1.min.js"></script>
 <script src="./assets/bootstrap.bundle.min.js"></script>
 <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script>
 <script src="./basicVideoCall.js"></script>
