@@ -107,11 +107,11 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $("#listen").click(function(){
-        console.log("listen mouse event");
+        console.log("listen click event");
         $('video').click(function (e) { //Offset mouse Position
           var posX = $(this).offset().left,
               posY = $(this).offset().top;
-          alert((e.pageX - posX) + ' , ' + (e.pageY - posY));
+          console.log((e.pageX - posX) + ' , ' + (e.pageY - posY));
         });
       });
     });
