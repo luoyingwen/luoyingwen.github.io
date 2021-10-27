@@ -131,8 +131,8 @@
           var clickInfo = {};
           clickInfo.x = offsetX;
           clickInfo.y = offsetY;
-          clickInfo.width = $("#local-player")[0].offsetWidth;
-          clickInfo.height = $("#local-player")[0].offsetHeight;
+          clickInfo.width = $(".player")[0].offsetWidth;
+          clickInfo.height = $(".player")[0].offsetHeight;
           var msgInfo = {};
           msgInfo.msgType = 3;
           msgInfo.content = JSON.stringify(clickInfo);
@@ -151,10 +151,6 @@
     This local media splayer is enabled when the user has successfully joined a Video Call channel.
   -->
   <div class="row video-group">
-    <div class="col">
-      <p id="local-player-name" class="player-name"></p>
-      <div id="local-player" class="player"></div>
-    </div>
     <div class="w-100"></div>
     <div class="col">
       <div id="remote-playerlist"></div>
