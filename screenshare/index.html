@@ -105,13 +105,36 @@
   </form>
 
   <script type="text/javascript">
+    function stringToUint8Array(str){
+      var arr = [];
+      for (var i = 0, j = str.length; i < j; ++i) {
+        arr.push(str.charCodeAt(i));
+      }
+    
+      var tmpUint8Array = new Uint8Array(arr);
+      return tmpUint8Array
+    }
+
     $(document).ready(function(){
       $("#listen").click(function(){
         console.log("listen click event");
         $('video').click(function (e) { //Offset mouse Position
-          var posX = $(this).offset().left,
-              posY = $(this).offset().top;
-          console.log((e.pageX - posX) + ' , ' + (e.pageY - posY));
+          var rect = e.currentTarget.getBoundingClientRect(),
+          offsetX = e.clientX - rect.left,
+          offsetY = e.clientY - rect.top;
+
+          var clickInfo = {};
+          clickInfo.x = offsetX;
+          clickInfo.y = offsetY;
+          clickInfo.width = $("#local-player")[0].offsetWidth;
+          clickInfo.height = $("#local-player")[0].offsetHeight;
+          var msgInfo = {};
+          msgInfo.msgType = 3;
+          msgInfo.content = JSON.stringify(clickInfo);
+          var posStr = (offsetX) + ' , ' + (offsetY);
+          
+          console.log(JSON.stringify(msgInfo));
+          client.sendStreamMessage(stringToUint8Array(JSON.stringify(msgInfo)));
         });
       });
     });
