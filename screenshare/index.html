@@ -119,10 +119,10 @@
     $("#channel")[0].value = 'beijing';
     $("#uid")[0].value = '23882139';
 
-
     $(document).ready(function(){
       $("#listen").click(function(){
         console.log("listen click event");
+        $("#listen").hide();
         $('video').click(function (e) { //Offset mouse Position
           var rect = e.currentTarget.getBoundingClientRect(),
           offsetX = e.clientX - rect.left,
