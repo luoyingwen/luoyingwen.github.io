@@ -101,10 +101,8 @@ async function join() {
   [ options.uid, localTracks.audioTrack, localTracks.videoTrack ] = await Promise.all([
     // Join the channel.
     client.join(options.appid, options.channel, options.token || null, options.uid || null),
-    // Create tracks to the local microphone and camera.
-    AgoraRTC.createMicrophoneAudioTrack(),
-    AgoraRTC.createCameraVideoTrack()
-  ]);
+    // Create tracks to the local microphone.
+    AgoraRTC.createMicrophoneAudioTrack()  ]);
 
   // Play the local video track to the local browser and update the UI with the user ID.
   localTracks.videoTrack.play("local-player");
