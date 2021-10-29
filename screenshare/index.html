@@ -115,7 +115,7 @@
     $(document).ready(function(){
       $("#listen").click(function(){
         console.log("listen click event");
-        if ($('video')) {
+        if ($('video').length > 0) {
           $("#listen").attr("disabled", true);
           $('video').click(function (e) { //Offset mouse Position
             var rect = e.currentTarget.getBoundingClientRect(),
@@ -141,7 +141,7 @@
 
   </script>
 
-  <button id="listen" type="button" disabled>Listen2</button>
+  <button id="listen" type="button" class="btn btn-primary btn-sm" disabled>Listen Mouse</button>
   <!--
     This local media splayer is enabled when the user has successfully joined a Video Call channel.
   -->
