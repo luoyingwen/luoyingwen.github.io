@@ -78,6 +78,7 @@ $("#join-form").submit(async function (e) {
     console.error(error);
   } finally {
     $("#leave").attr("disabled", false);
+    $("#listen").attr("disabled", false);
   }
 })
 
@@ -136,6 +137,7 @@ async function leave() {
   $("#local-player-name").text("");
   $("#join").attr("disabled", false);
   $("#leave").attr("disabled", true);
+  $("#listen").attr("disabled", true);
   console.log("client leaves channel success");
 }
 
