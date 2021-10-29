@@ -115,25 +115,27 @@
     $(document).ready(function(){
       $("#listen").click(function(){
         console.log("listen click event");
-        $("#listen").attr("disabled", true);
-        $('video').click(function (e) { //Offset mouse Position
-          var rect = e.currentTarget.getBoundingClientRect(),
-          offsetX = e.clientX - rect.left,
-          offsetY = e.clientY - rect.top;
+        if ($('video')) {
+          $("#listen").attr("disabled", true);
+          $('video').click(function (e) { //Offset mouse Position
+            var rect = e.currentTarget.getBoundingClientRect(),
+            offsetX = e.clientX - rect.left,
+            offsetY = e.clientY - rect.top;
 
-          var clickInfo = {};
-          clickInfo.x = offsetX;
-          clickInfo.y = offsetY;
-          clickInfo.width = $(".player")[0].offsetWidth;
-          clickInfo.height = $(".player")[0].offsetHeight;
-          var msgInfo = {};
-          msgInfo.msgType = 3;
-          msgInfo.content = JSON.stringify(clickInfo);
-          var posStr = (offsetX) + ' , ' + (offsetY);
-          
-          console.log(JSON.stringify(msgInfo));
-          client.sendStreamMessage(stringToUint8Array(JSON.stringify(msgInfo)));
-        });
+            var clickInfo = {};
+            clickInfo.x = offsetX;
+            clickInfo.y = offsetY;
+            clickInfo.width = $(".player")[0].offsetWidth;
+            clickInfo.height = $(".player")[0].offsetHeight;
+            var msgInfo = {};
+            msgInfo.msgType = 3;
+            msgInfo.content = JSON.stringify(clickInfo);
+            var posStr = (offsetX) + ' , ' + (offsetY);
+            
+            console.log(JSON.stringify(msgInfo));
+            client.sendStreamMessage(stringToUint8Array(JSON.stringify(msgInfo)));
+          });
+        }
       });
     });
 
