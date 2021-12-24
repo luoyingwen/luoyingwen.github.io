@@ -20,7 +20,7 @@ const WEBRTC_ICE_MSG_ID = 10003;
 const APPID = '7e8aae0b5999430e9b8823553dab699d';
 const accountName = 'student_' + Date.now();
 const channelName = 'uhd_test2';
-const agoraClient = AgoraRTM.createInstance(APPID, { enableLogUpload: false }); // Pass your App ID here.
+let agoraClient;
 console.log(accountName);
 let remotePeerId;
 
@@ -69,6 +69,8 @@ function getName(pc) {
 
 async function start() {
   console.log('Requesting local stream');
+  agoraClient = AgoraRTM.createInstance(APPID, { enableLogUpload: false }); // Pass your App ID here.
+
   await login(accountName);
   await joinChannel(channelName);
   subscribeClientEvents();
