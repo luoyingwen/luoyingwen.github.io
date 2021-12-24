@@ -15,12 +15,12 @@ function startMeeting()
         video: {
             width: { 
                 ideal: 3840,
-                min: 3840,
+                min: 1280,
                 max: 3840
              },
             height: { 
                 ideal: 2160,
-                min: 2160,
+                min: 720,
                 max: 2160
             }
         }
