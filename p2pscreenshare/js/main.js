@@ -79,7 +79,6 @@ async function start() {
   await joinChannel(channelName);
   subscribeClientEvents();
   subscribeChannelEvents();
-  sendChannelMessage(REQUEST_TEACHER + '##', null);
 
   startButton.disabled = true;
   try {
@@ -103,32 +102,7 @@ async function call() {
   callButton.disabled = true;
   hangupButton.disabled = false;
   console.log('Starting call');
-  startTime = window.performance.now();
-  const videoTracks = localStream.getVideoTracks();
-  const audioTracks = localStream.getAudioTracks();
-  if (videoTracks.length > 0) {
-    console.log(`Using video device: ${videoTracks[0].label}`);
-  }
-  if (audioTracks.length > 0) {
-    console.log(`Using audio device: ${audioTracks[0].label}`);
-  }
-  const configuration = {};
-  console.log('RTCPeerConnection configuration:', configuration);
-  pc1 = new RTCPeerConnection(configuration);
-  console.log('Created local peer connection object pc1');
-  pc1.addEventListener('icecandidate', e => onIceCandidate(pc1, e));
-  pc1.addEventListener('iceconnectionstatechange', e => onIceStateChange(pc1, e));
-
-  localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
-  console.log('Added local stream to pc1');
-
-  try {
-    console.log('pc1 createOffer start');
-    const offer = await pc1.createOffer(offerOptions);
-    await onCreateOfferSuccess(offer);
-  } catch (e) {
-    onCreateSessionDescriptionError(e);
-  }
+  sendChannelMessage(REQUEST_TEACHER + '##', null);
 }
 
 async function createOfferAndSend() {
