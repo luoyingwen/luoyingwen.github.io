@@ -87,7 +87,13 @@ async function start() {
     console.log('Received local stream');
     localVideo.srcObject = stream;
     localStream = stream;
+    
     callButton.disabled = false;
+
+    if (pc1) {
+      localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
+      console.log('Added local stream to pc1 22222');
+    }
   } catch (e) {
     alert(`getUserMedia() error: ${e.name}`);
   }
@@ -264,14 +270,6 @@ function subscribeClientEvents () {
         else if ( msgId === RESPONSE_ACCEPTCONN + '') {
           console.log('RESPONSE_ACCEPTCONN');
           remotePeerId = peerId;
-          const videoTracks = localStream.getVideoTracks();
-          const audioTracks = localStream.getAudioTracks();
-          if (videoTracks.length > 0) {
-            console.log(`Using video device: ${videoTracks[0].label}`);
-          }
-          if (audioTracks.length > 0) {
-            console.log(`Using audio device: ${audioTracks[0].label}`);
-          }
           const configuration = {};
           console.log('RTCPeerConnection configuration:', configuration);
           pc1 = new RTCPeerConnection(configuration);
@@ -281,8 +279,10 @@ function subscribeClientEvents () {
           pc1.addEventListener('track', gotRemoteStream);
 
 
-          localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
-          console.log('Added local stream to pc1');
+          if (localStream) {
+            localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
+            console.log('Added local stream to pc1 1111111');
+          }
         
           createOfferAndSend();
         }
