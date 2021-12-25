@@ -39,6 +39,7 @@ const remoteVideo = document.getElementById('remoteVideo');
 
 document.addEventListener("WeixinJSBridgeReady", function () {  
 	localVideo.play();
+  remoteVideo.play();
 }, false);
 
 localVideo.addEventListener('loadedmetadata', function() {
