@@ -47,6 +47,7 @@ localVideo.addEventListener('loadedmetadata', function() {
 });
 
 remoteVideo.addEventListener('loadedmetadata', function() {
+  remoteVideo.play();
   console.log(`Remote video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
 });
 
@@ -93,6 +94,7 @@ async function start() {
     if (pc1) {
       localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
       console.log('Added local stream to pc1 22222');
+      localVideo.play();
     }
   } catch (e) {
     alert(`getUserMedia() error: ${e.name}`);
@@ -151,6 +153,7 @@ function gotRemoteStream(e) {
   if (remoteVideo.srcObject !== e.streams[0]) {
     remoteVideo.srcObject = e.streams[0];
     console.log(' received remote stream');
+    remoteVideo.play();
   }
 }
 
@@ -257,6 +260,7 @@ function subscribeClientEvents () {
           if (localStream) {
             localStream.getTracks().forEach(track => pc1.addTrack(track, localStream));
             console.log('Added local stream to pc1 1111111');
+            localVideo.play();
           }
         
           createOfferAndSend();
