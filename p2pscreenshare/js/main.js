@@ -37,6 +37,10 @@ let startTime;
 const localVideo = document.getElementById('localVideo');
 const remoteVideo = document.getElementById('remoteVideo');
 
+document.addEventListener("WeixinJSBridgeReady", function () {  
+	localVideo.play();
+  remoteVideo.play();
+}, false);
 
 localVideo.addEventListener('loadedmetadata', function() {
   console.log(`Local video videoWidth: ${this.videoWidth}px,  videoHeight: ${this.videoHeight}px`);
