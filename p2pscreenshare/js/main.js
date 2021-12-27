@@ -16,6 +16,7 @@ const ANNOUNCE_TEACHER = 106;
 const WEBRTC_OFFER_MSG_ID = 10001;
 const WEBRTC_ANSWER_MSG_ID = 10002;
 const WEBRTC_ICE_MSG_ID = 10003;
+let SHARESCREEN = false;
 
 const APPID = '7e8aae0b5999430e9b8823553dab699d';
 const accountName = 'student_' + Date.now();
@@ -26,12 +27,11 @@ let remotePeerId;
 
 const startButton = document.getElementById('startButton');
 const callButton = document.getElementById('callButton');
-const hangupButton = document.getElementById('hangupButton');
+const shareScreenButton = document.getElementById('shareScreenButton');
 callButton.disabled = true;
-hangupButton.disabled = true;
 startButton.addEventListener('click', start);
 callButton.addEventListener('click', call);
-hangupButton.addEventListener('click', hangup);
+shareScreenButton.addEventListener('click', setShareScreen);
 
 let startTime;
 const localVideo = document.getElementById('localVideo');
@@ -84,7 +84,14 @@ async function start() {
 
   startButton.disabled = true;
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+    let stream;
+    if (!SHARESCREEN) {
+      stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+    }
+    else {
+      stream = await navigator.mediaDevices.getDisplayMedia({video: true});
+    }
+
     console.log('Received local stream');
     localVideo.srcObject = stream;
     localStream = stream;
@@ -103,7 +110,6 @@ async function start() {
 
 async function call() {
   callButton.disabled = true;
-  hangupButton.disabled = false;
   console.log('Starting call');
   sendChannelMessage(REQUEST_TEACHER + '##', null);
 }
@@ -185,12 +191,9 @@ function onIceStateChange(pc, event) {
   }
 }
 
-function hangup() {
-  console.log('Ending call');
-  pc1.close();
-  pc1 = null;
-  hangupButton.disabled = true;
-  callButton.disabled = false;
+function setShareScreen() {
+  SHARESCREEN = true;
+  shareScreenButton.disabled = true;
 }
 
 

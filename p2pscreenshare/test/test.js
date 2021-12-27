@@ -16,21 +16,21 @@ export default {
     browser.waitForReadyState('#localVideo', 0, 1000);
     browser.waitForReadyState('#remoteVideo', 0, 1000);
     browser.expect.element('#callButton').to.not.be.enabled.before(1000);
-    browser.expect.element('#hangupButton').to.not.be.enabled.before(1000);
+    browser.expect.element('#shareScreenButton').to.not.be.enabled.before(1000);
     browser.click('#startButton');
     browser.expect.element('#startButton').to.not.be.enabled.before(1000);
     browser.expect.element('#callButton').to.be.enabled.before(1000);
-    browser.expect.element('#hangupButton').to.not.be.enabled.before(1000);
+    browser.expect.element('#shareScreenButton').to.not.be.enabled.before(1000);
     browser.waitForReadyState('#localVideo', 4, 1000);
     browser.click('#callButton');
     browser.waitForReadyState('#remoteVideo', 4, 1000);
     browser.expect.element('#startButton').to.not.be.enabled.before(1000);
     browser.expect.element('#callButton').to.not.be.enabled.before(1000);
-    browser.expect.element('#hangupButton').to.be.enabled.before(1000);
-    browser.click('#hangupButton');
+    browser.expect.element('#shareScreenButton').to.be.enabled.before(1000);
+    browser.click('#shareScreenButton');
     browser.expect.element('#startButton').to.not.be.enabled.before(1000);
     browser.expect.element('#callButton').to.be.enabled.before(1000);
-    browser.expect.element('#hangupButton').to.not.be.enabled.before(1000);
+    browser.expect.element('#shareScreenButton').to.not.be.enabled.before(1000);
     browser.end();
   }
 };
