@@ -250,7 +250,13 @@ function subscribeClientEvents () {
         else if ( msgId === RESPONSE_ACCEPTCONN + '') {
           console.log('RESPONSE_ACCEPTCONN');
           remotePeerId = peerId;
-          const configuration = {};
+          const configuration = {
+            iceServers: [
+              {
+                urls: ["stun:stun.voiparound.com", "stun:stun.voipbuster.com", "stun:stun.voipstunt.com"],
+              },
+            ]
+          };
           console.log('RTCPeerConnection configuration:', configuration);
           pc1 = new RTCPeerConnection(configuration);
           console.log('Created local peer connection object pc1');
