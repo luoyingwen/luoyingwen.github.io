@@ -22,7 +22,6 @@ const APPID = '7e8aae0b5999430e9b8823553dab699d';
 const accountName = 'student_' + Date.now();
 const channelName = 'uhd_test2';
 let agoraClient;
-console.log(accountName);
 let remotePeerId;
 
 const startButton = document.getElementById('startButton');
